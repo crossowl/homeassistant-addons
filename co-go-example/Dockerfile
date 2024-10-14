@@ -1,15 +1,22 @@
-ARG BUILD_FROM
-ARG HASS_VERSION
-ARG TARGETPLATFORM
+ARG BUILD_FROM="ghcr.io/home-assistant/amd64-base:3.18"
+ARG HASS_VERSION=""
+#ARG TARGETPLATFORM="amd64"
 
 # ----------------------------------------------------------------------------
 FROM golang:1.22-alpine as builder
+
+RUN <<EOF
+  apk update
+  apk upgrade
+EOF
 
 COPY app_src /app/src
 
 WORKDIR /app/src
 
-RUN go
+RUN go get -u ./...
+
+RUN go build -o /app/build/addon /app/src/cmd/addon/main.go
 
 # ----------------------------------------------------------------------------
 FROM $BUILD_FROM
@@ -26,6 +33,12 @@ LABEL \
     io.hass.name="Example Golang Addon" \
     io.hass.description="Example Addon Containerised Addon for Home Assistant" \
     io.hass.platform="${TARGETPLATFORM}"
+
+RUN <<EOF
+  apk update
+  apk upgrade
+  apk cache clean
+EOF
 
 COPY rootfs /
 
