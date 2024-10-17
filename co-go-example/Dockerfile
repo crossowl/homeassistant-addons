@@ -37,7 +37,6 @@ LABEL \
 RUN <<EOF
   apk update
   apk upgrade
-  apk cache clean
 EOF
 
 COPY rootfs /
