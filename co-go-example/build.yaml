@@ -11,5 +11,5 @@ labels:
   org.opencontainers.image.authors: "Chris Howell (Cross Owl)"
   org.opencontainers.image.documentation: "https://github.com/crossowl/homeassistant-addons/tree/main/co-go-example/DOCS.md"
   org.opencontainers.image.licenses: "Apache License 2.0"
-args: {}
+#args: {}
 
