@@ -1,0 +1,19 @@
+name: Example Go Addon
+version: "0.0.1"
+slug: co-go-example
+description: Example Go Addon for Home Assistant
+url: "https://github.com/crossowl/homeassistant-addons/tree/main/co-go-example"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+init: false
+map:
+  - share:rw
+options:
+  message: "Hello world..."
+schema:
+  message: "str?"
+image: "ghcr.io/crossowl/{arch}-ha-addon-co-go-example"
